@@ -1,0 +1,39 @@
+<div class="p-4">
+  <button class="btn btn-success" data-toggle="modal" data-target="#modal">Add</button>
+  <div class="row mt-3">
+    <div class="col-md-3 mb-3" *ngFor="let employee of employees$ | async">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{employee.name}}</h5>
+          <span class="card-text mb-2 badge badge-success badge-pill">{{employee.department}}</span><br>
+          <button type="button" class="card-link btn btn-outline-info" [routerLink]="['/employee', employee.id]" routerLinkActive="router-link-active" >View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employee</h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <input class="form-control" formControlName="department">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="create()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
