@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { Employee } from '../Employee';
-import { GetEmployees } from '../store/actions/employee.action';
+import { AddEmployee, DeleteEmployee, GetEmployees, UpdateEmployee } from '../store/actions/employee.action';
 import { EmployeeState } from '../store/state/employee.state';
 
 @Component({
@@ -27,11 +27,25 @@ export class IndexComponent implements OnInit {
   }
 
   create() {
-    // this._apiService.create(this.form.value).subscribe(response => {
-    //   this.form.reset();
-    //   alert(response.message);
-    //   this.getAll();
-    // });
+    this.store.dispatch(new AddEmployee(this.form.value)).subscribe(response => {
+      this.form.reset();
+      console.log(response);
+      this.store.dispatch(new GetEmployees());
+    });
+  }
+
+  edit(formData) {
+    this.form.patchValue({ ...formData });
+  }
+
+  update(id: string) {
+    this.store.dispatch(new UpdateEmployee(id, this.form.value));
+  }
+
+  delete(id: string) {
+    if(confirm('Are you sure to delete?')) {
+      this.store.dispatch(new DeleteEmployee(id));
+    }
   }
 
 }

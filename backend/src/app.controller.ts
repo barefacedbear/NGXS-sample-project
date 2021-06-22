@@ -19,19 +19,9 @@ export class AppController {
 
     async getAll(req: Request, res: Response) {
         try {
-            res.status(200).send(await db.sample.findAll({
+            res.status(200).send({ success: true, data: await db.sample.findAll({
                 attributes: { exclude: [ 'createdAt', 'updatedAt' ] }
-            }));
-        } catch(error) {
-            res.status(401).send({ success: false, data: '', message: 'INTERNAL SERVER ERROR', status: 'ERROR' });
-        }
-    }
-
-    async getOne(req: Request, res: Response) {
-        try {
-            res.status(200).send({ success: true, data: await db.sample.findByPk(req.params.id, {
-                attributes: { exclude: [ 'createdAt', 'updatedAt' ] }
-            }), message: 'FOUND', status: 'OK' });
+            }), messae: 'SUCCESS', status: 'OK'});
         } catch(error) {
             res.status(401).send({ success: false, data: '', message: 'INTERNAL SERVER ERROR', status: 'ERROR' });
         }

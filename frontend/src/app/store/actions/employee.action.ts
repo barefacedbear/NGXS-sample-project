@@ -16,3 +16,15 @@ export class GetEmployee {
     static readonly type = '[Employee] Get';
     constructor(public id: string) {}
 }
+
+// Update Employee
+export class UpdateEmployee {
+    static readonly type = '[Employee] Update';
+    constructor(public id: string, public payload: Employee) {}
+}
+
+// Delete Employee
+export class DeleteEmployee {
+    static readonly type = '[Employee] Delete';
+    constructor(public id: string) {}
+}

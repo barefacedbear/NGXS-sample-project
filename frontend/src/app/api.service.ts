@@ -16,11 +16,7 @@ export class ApiService {
   }
 
   getAll() {
-    return this.http.get<Employee[]>(`${this.URL}/getAll`);
-  }
-
-  getOne(id: string) {
-    return this.http.get<{ data: Employee }>(`${this.URL}/get/${id}`);
+    return this.http.get<{ data: Employee[] }>(`${this.URL}/getAll`);
   }
 
   update(id: string, formData: Employee) {

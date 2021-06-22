@@ -6,7 +6,9 @@
         <div class="card-body">
           <h5 class="card-title">{{employee.name}}</h5>
           <span class="card-text mb-2 badge badge-success badge-pill">{{employee.department}}</span><br>
-          <button type="button" class="card-link btn btn-outline-info" [routerLink]="['/employee', employee.id]" routerLinkActive="router-link-active" >View</button>
+          <button type="button" class="card-link btn btn-outline-info" [routerLink]="['/employee', employee.id]">View</button>
+          <button type="button" class="card-link btn btn-outline-primary" (click)="edit(employee); id.value=employee.id" data-toggle="modal" data-target="#modal">Edit</button>
+          <button type="button" class="card-link btn btn-outline-danger" (click)="delete(employee.id)">Delete</button>
         </div>
       </div>
     </div>
@@ -28,11 +30,13 @@
             <label>Department</label>
             <input class="form-control" formControlName="department">
           </div>
+          <input #id>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="create()">Save</button>
+        <button type="button" class="btn btn-primary" (click)="create()" *ngIf="!id.value">Save</button>
+        <button type="button" class="btn btn-primary" (click)="update(id.value)" *ngIf="id.value">Update</button>
       </div>
     </div>
   </div>
